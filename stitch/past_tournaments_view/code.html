@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Knight AI - Past Tournaments</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#135bec",
+              "background-light": "#f6f6f8",
+              "background-dark": "#101622",
+            },
+            fontFamily: {
+              display: ["Space Grotesk"],
+            },
+            borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+          },
+        },
+      };
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white">
+<div class="flex min-h-screen w-full flex-col">
+<header class="sticky top-0 z-10 flex items-center justify-between border-b border-white/10 bg-background-light/80 px-10 py-3 backdrop-blur-sm dark:bg-background-dark/80">
+<div class="flex items-center gap-4">
+<svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z"></path>
+<path d="M12.5 17.5L14.24 13.85L18 12L14.24 10.15L12.5 6.5L10.76 10.15L7 12L10.76 13.85L12.5 17.5Z"></path>
+</svg>
+<h1 class="text-xl font-bold text-black dark:text-white">Knight AI</h1>
+</div>
+<nav class="hidden items-center gap-8 md:flex">
+<a class="text-sm font-medium text-black/60 transition-colors hover:text-black dark:text-white/60 dark:hover:text-white" href="#">Play</a>
+<a class="text-sm font-medium text-black/60 transition-colors hover:text-black dark:text-white/60 dark:hover:text-white" href="#">Learn</a>
+<a class="text-sm font-medium text-black/60 transition-colors hover:text-black dark:text-white/60 dark:hover:text-white" href="#">Community</a>
+<a class="text-sm font-medium text-primary" href="#">Past Tournaments</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-black transition-colors hover:bg-white/20 dark:text-white">
+<span class="material-symbols-outlined"> notifications </span>
+</button>
+<div class="h-10 w-10 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCD8L2-_Kj1uPTEMe4lXzDoO9QNbm4TDwtMIEJIX_O7c-yEVox9vRFhGt-iGGtsmQb4qxFsMhnJkV8H2EulmvsbiZtnMdGj4WncTaIibL0DjvOFauQGVSXxqNu8fiaW1n3rmpr6Ub0MdZF4mYw7q6UqPyZ7OApPqZxT3sjfxk0gSYVHYuRyDUat6E_lyoXKHKREOx4Yw47HYfjJYA-CiGsPKUuBPQ_dsbMHe2ekHg__O_4SNyf6ivGm1H8l0umqENUBXk1Tzcef2wc");'></div>
+</div>
+</header>
+<main class="flex-1 px-4 py-8 sm:px-6 md:px-10 lg:px-20">
+<div class="mx-auto max-w-7xl">
+<h2 class="text-3xl font-bold text-black dark:text-white">Past Tournaments</h2>
+<p class="mt-2 text-black/60 dark:text-white/60">Browse through the results of recently concluded tournaments.</p>
+<div class="mt-8 overflow-hidden rounded-lg border border-white/10 bg-white/5 dark:bg-black/20">
+<div class="overflow-x-auto">
+<table class="min-w-full table-auto">
+<thead class="bg-white/5 dark:bg-black/20">
+<tr>
+<th class="px-6 py-4 text-left text-sm font-semibold text-black dark:text-white" scope="col">Tournament Name</th>
+<th class="px-6 py-4 text-left text-sm font-semibold text-black dark:text-white" scope="col">Date</th>
+<th class="px-6 py-4 text-left text-sm font-semibold text-black dark:text-white" scope="col">Winner</th>
+<th class="px-6 py-4 text-left text-sm font-semibold text-black dark:text-white" scope="col">Summary</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/10">
+<tr class="cursor-pointer transition-colors hover:bg-white/10 dark:hover:bg-black/30">
+<td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-black dark:text-white">Grandmaster Showdown</td>
+<td class="whitespace-nowrap px-6 py-4 text-sm text-black/60 dark:text-white/60">2024-03-15</td>
+<td class="whitespace-nowrap px-6 py-4 text-sm text-black/60 dark:text-white/60">Magnus Carlsen</td>
+<td class="max-w-xs truncate px-6 py-4 text-sm text-black/60 dark:text-white/60">A thrilling match with a surprising finish.</td>
+</tr>
+<tr class="cursor-pointer transition-colors hover:bg-white/10 dark:hover:bg-black/30">
+<td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-black dark:text-white">Rapid Chess Championship</td>
+<td class="whitespace-nowrap px-6 py-4 text-sm text-black/60 dark:text-white/60">2024-02-20</td>
+<td class="whitespace-nowrap px-6 py-4 text-sm text-black/60 dark:text-white/60">Hikaru Nakamura</td>
+<td class="max-w-xs truncate px-6 py-4 text-sm text-black/60 dark:text-white/60">Fast-paced games with strategic depth.</td>
+</tr>
+<tr class="cursor-pointer transition-colors hover:bg-white/10 dark:hover:bg-black/30">
+<td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-black dark:text-white">Blitz Battle Royale</td>
+<td class="whitespace-nowrap px-6 py-4 text-sm text-black/60 dark:text-white/60">2024-01-10</td>
+<td class="whitespace-nowrap px-6 py-4 text-sm text-black/60 dark:text-white/60">Alireza Firouzja</td>
+<td class="max-w-xs truncate px-6 py-4 text-sm text-black/60 dark:text-white/60">Intense blitz games with quick decisions.</td>
+</tr>
+<tr class="cursor-pointer transition-colors hover:bg-white/10 dark:hover:bg-black/30">
+<td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-black dark:text-white">Classical Chess Masters</td>
+<td class="whitespace-nowrap px-6 py-4 text-sm text-black/60 dark:text-white/60">2023-12-05</td>
+<td class="whitespace-nowrap px-6 py-4 text-sm text-black/60 dark:text-white/60">Fabiano Caruana</td>
+<td class="max-w-xs truncate px-6 py-4 text-sm text-black/60 dark:text-white/60">A classic tournament with long, thoughtful games.</td>
+</tr>
+<tr class="cursor-pointer transition-colors hover:bg-white/10 dark:hover:bg-black/30">
+<td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-black dark:text-white">Amateur Open</td>
+<td class="whitespace-nowrap px-6 py-4 text-sm text-black/60 dark:text-white/60">2023-11-18</td>
+<td class="whitespace-nowrap px-6 py-4 text-sm text-black/60 dark:text-white/60">Ethan Harper</td>
+<td class="max-w-xs truncate px-6 py-4 text-sm text-black/60 dark:text-white/60">An open tournament showcasing emerging talent.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

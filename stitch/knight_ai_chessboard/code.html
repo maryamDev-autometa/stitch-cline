@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Space+Grotesk%3Awght%40400%3B500%3B700" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,1,0" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#135bec",
+            "background-light": "#f6f6f8",
+            "background-dark": "#101622",
+            "board-dark": "#769656", 
+            "board-light": "#eeeed2",
+          },
+          fontFamily: {
+            "display": ["Space Grotesk"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style type="text/tailwindcss">
+    .material-symbols-outlined {
+        font-variation-settings:
+        'FILL' 1
+    }
+    .white-piece {
+        -webkit-text-stroke: 1px #101622;text-stroke: 1px #101622;
+        paint-order: stroke fill;
+    }
+    .dark .white-piece {
+        -webkit-text-stroke: 1px #fff;text-stroke: 1px #fff;
+    }
+    </style>
+<title>Knight AI</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+<div class="flex h-screen w-full flex-col">
+<header class="flex items-center justify-between border-b border-gray-200/10 dark:border-gray-700/50 px-6 py-3">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">chess_knight</span>
+<h1 class="text-xl font-bold text-gray-900 dark:text-white">Knight AI</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-primary/90">
+          New Game
+        </button>
+<img alt="User Avatar" class="size-10 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3bssoYj_aWwS5YL4qzFcbbCpiwvWgdIzTZGe-enaBzC2Nvrt9xeSCcLgX0JL_AAhclQFKIMhZmN5iAi473cdcJTpPpPm92tuL2PI1k9DcArXjEkinM_sKRfAPSXCouC0vz3_QfGE2nXM_WfY0_32LQInezhZIBjUslUVEEL42R-L33njVrKwM6d41RFC3guMlqbSftHJsK-Ik0SUSbwMWal8mfFWfzDiEHLcIe7gq_XoklwtAVPxOCdeQ6xk4osTA84x7zvalRAE"/>
+</div>
+</header>
+<main class="flex flex-1 items-stretch p-4 sm:p-6 lg:p-8">
+<div class="flex flex-1 items-center justify-center">
+<div class="w-full max-w-2xl aspect-square">
+<div class="grid grid-cols-8 grid-rows-8 w-full h-full rounded-lg overflow-hidden shadow-2xl">
+<script>
+            const board = document.querySelector('.grid');
+            const pieces = {
+              'r': '&#9820;',
+              'n': '&#9822;',
+              'b': '&#9821;',
+              'q': '&#9819;',
+              'k': '&#9818;',
+              'p': '&#9823;',
+              'R': '&#9814;',
+              'N': '&#9816;',
+              'B': '&#9815;',
+              'Q': '&#9813;',
+              'K': '&#9812;',
+              'P': '&#9817;'
+            };
+            const initialBoard = [
+              ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'],
+              ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
+              ['', '', '', '', '', '', '', ''],
+              ['', '', '', '', '', '', '', ''],
+              ['', '', '', '', '', '', '', ''],
+              ['', '', '', '', '', '', '', ''],
+              ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
+              ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R']
+            ];
+            for (let i = 0; i < 8; i++) {
+              for (let j = 0; j < 8; j++) {
+                const square = document.createElement('div');
+                const isLight = (i + j) % 2 !== 0;
+                square.className = `flex items-center justify-center ${isLight ? 'bg-board-light' : 'bg-board-dark'}`;
+                const piece = initialBoard[i][j];
+                if (piece) {
+                  const pieceElement = document.createElement('span');
+                  pieceElement.innerHTML = pieces[piece];
+                  let pieceClass = 'text-4xl md:text-5xl cursor-pointer ';
+                  if ('rnbqkp'.includes(piece)) {
+                      pieceClass += 'text-black';
+                  } else {
+                      pieceClass += 'text-white white-piece';
+                  }
+                  pieceElement.className = pieceClass;
+                  square.appendChild(pieceElement);
+                }
+                board.appendChild(square);
+              }
+            }
+          </script>
+</div>
+</div>
+</div>
+<aside class="w-80 flex-shrink-0 ml-8 bg-background-dark/50 dark:bg-background-dark/80 rounded-lg shadow-xl flex flex-col">
+<div class="p-4 border-b border-gray-700/50">
+<h2 class="text-lg font-semibold text-white">Game Info</h2>
+</div>
+<div class="flex-1 p-4 space-y-4">
+<div class="flex justify-between items-center bg-background-dark/70 p-3 rounded-lg">
+<span class="text-gray-400">Turn</span>
+<div class="flex items-center gap-2">
+<div class="w-4 h-4 rounded-full bg-white"></div>
+<span class="font-bold text-white">White's Turn</span>
+</div>
+</div>
+<div class="flex justify-between items-center bg-background-dark/70 p-3 rounded-lg">
+<span class="text-gray-400">White</span>
+<span class="font-mono text-lg font-bold text-white">05:00</span>
+</div>
+<div class="flex justify-between items-center bg-background-dark/70 p-3 rounded-lg">
+<span class="text-gray-400">Black</span>
+<span class="font-mono text-lg font-bold text-white">05:00</span>
+</div>
+</div>
+<div class="flex-1 p-4 border-t border-gray-700/50 flex flex-col">
+<h3 class="text-md font-semibold text-white mb-2">Moves</h3>
+<div class="flex-1 bg-background-dark/70 rounded-lg p-2 overflow-y-auto">
+<ol class="text-gray-300 font-mono text-sm space-y-1">
+<li class="flex items-center"><span class="w-6">1.</span> e4 e5</li>
+<li class="flex items-center"><span class="w-6">2.</span> Nf3 Nc6</li>
+<li class="flex items-center"><span class="w-6">3.</span> Bb5 a6</li>
+<li class="flex items-center"><span class="w-6">4.</span> Ba4 Nf6</li>
+<li class="flex items-center"><span class="w-6">5.</span> O-O Be7</li>
+<li class="flex items-center"><span class="w-6">6.</span> Re1 b5</li>
+<li class="flex items-center"><span class="w-6">7.</span> Bb3 O-O</li>
+<li class="flex items-center"><span class="w-6">8.</span> c3 d5</li>
+</ol>
+</div>
+</div>
+</aside>
+</main>
+</div>
+</body></html>

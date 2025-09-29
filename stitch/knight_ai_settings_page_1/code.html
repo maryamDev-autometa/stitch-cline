@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Knight AI - Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#0da50d",
+              "background-light": "#f6f8f6",
+              "background-dark": "#121212",
+              accent: {
+                DEFAULT: "#3b82f6",
+                hover: "#2563eb",
+              },
+            },
+            fontFamily: {
+              display: ["Space Grotesk", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px"
+            },
+          },
+        },
+      };
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 1,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24
+      }
+    </style>
+</head>
+<body class="bg-background-dark font-display text-gray-200">
+<div class="flex flex-col min-h-screen">
+<main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="max-w-2xl mx-auto">
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-accent text-4xl">chess_knight</span>
+<h1 class="text-3xl font-bold text-white">Knight AI Settings</h1>
+</div>
+<div class="space-y-8">
+<div>
+<h3 class="text-xl font-semibold mb-4 text-gray-300 border-b border-white/10 pb-3">Account</h3>
+<div class="space-y-3">
+<a class="flex items-center p-4 rounded-lg bg-white/5 hover:bg-accent/20 transition-colors group" href="#">
+<div class="p-3 rounded-lg bg-accent/20 mr-4">
+<span class="material-symbols-outlined text-accent">person</span>
+</div>
+<div class="flex-grow">
+<p class="font-medium text-white">Account Management</p>
+<p class="text-sm text-gray-400">Manage your account details and security</p>
+</div>
+<span class="material-symbols-outlined text-gray-500 group-hover:text-accent transition-colors">chevron_right</span>
+</a>
+</div>
+</div>
+<div>
+<h3 class="text-xl font-semibold mb-4 text-gray-300 border-b border-white/10 pb-3">Preferences</h3>
+<div class="space-y-3">
+<a class="flex items-center p-4 rounded-lg bg-white/5 hover:bg-accent/20 transition-colors group" href="#">
+<div class="p-3 rounded-lg bg-accent/20 mr-4">
+<span class="material-symbols-outlined text-accent">notifications</span>
+</div>
+<div class="flex-grow">
+<p class="font-medium text-white">Notifications</p>
+<p class="text-sm text-gray-400">Customize your notification settings</p>
+</div>
+<span class="material-symbols-outlined text-gray-500 group-hover:text-accent transition-colors">chevron_right</span>
+</a>
+</div>
+</div>
+<div>
+<h3 class="text-xl font-semibold mb-4 text-gray-300 border-b border-white/10 pb-3">General</h3>
+<div class="space-y-3">
+<a class="flex items-center p-4 rounded-lg bg-accent/20 border border-accent/50 ring-1 ring-accent/30 transition-colors group" href="#">
+<div class="p-3 rounded-lg bg-accent/20 mr-4">
+<span class="material-symbols-outlined text-accent">tune</span>
+</div>
+<div class="flex-grow">
+<p class="font-medium text-white">App Settings</p>
+<p class="text-sm text-gray-400">Adjust general app settings and appearance</p>
+</div>
+<span class="material-symbols-outlined text-accent transition-colors">chevron_right</span>
+</a>
+</div>
+</div>
+<div class="pt-6">
+<button class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-red-600/20 text-red-400 border border-red-600/50 font-bold text-base hover:bg-red-600/30 transition-colors">
+<span class="material-symbols-outlined">logout</span>
+                    Log Out
+                </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
