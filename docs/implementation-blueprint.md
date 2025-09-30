@@ -254,3 +254,169 @@ export const borderRadius = {
    ├── (auth)/
    │   ├── login/
    │   ├── signup/
+   │   └── forgot-password/
+   ├── (game)/
+   │   ├── setup/
+   │   ├── play/
+   │   └── history/
+   ├── settings/
+   └── tournaments/
+   components/
+   ├── ui/
+   ├── forms/
+   ├── chess/
+   └── layout/
+   lib/
+   ├── design-system.ts
+   ├── chess-engine.ts
+   └── utils.ts
+   ```
+
+### Phase 2: Core Components
+1. **Layout Components**
+   - Create `Header` component with all 4 variants
+   - Build `Container` wrapper component
+   - Implement `PageLayout` base template
+
+2. **Basic UI Components**
+   - Build `Button` component with all variants
+   - Create form components (`Input`, `Label`, `Checkbox`, etc.)
+   - Implement `Logo` and `UserAvatar` components
+
+3. **Navigation System**
+   - Build `NavigationMenu` component
+   - Implement routing structure
+   - Add active state management
+
+### Phase 3: Authentication Pages
+1. **Auth Layout**
+   - Create split-screen layout with chess pattern
+   - Implement responsive behavior
+   - Add dark mode support
+
+2. **Auth Forms**
+   - Build login form with validation
+   - Create signup form with all fields
+   - Implement forgot password form
+   - Add form submission handling
+
+### Phase 4: Game Setup Pages
+1. **Player Configuration**
+   - Build `PlayerCard` components
+   - Create AI model selection interface
+   - Implement difficulty selection
+   - Add game options checkboxes
+
+2. **Game Setup Forms**
+   - Human vs AI setup page
+   - Human vs Human setup page
+   - AI vs AI setup page
+   - Form validation and submission
+
+### Phase 5: Chess Game Interface
+1. **Chess Board**
+   - Create 8x8 grid layout
+   - Implement piece positioning
+   - Add square color alternation
+   - Handle piece interactions
+
+2. **Game Sidebar**
+   - Build game info display
+   - Create timer components
+   - Implement move history
+   - Add turn indicators
+
+3. **Chess Logic**
+   - Basic move validation
+   - Piece movement rules
+   - Game state management
+   - Move history tracking
+
+### Phase 6: Data Pages
+1. **Game History**
+   - Build data table component
+   - Implement search and filtering
+   - Add pagination controls
+   - Create status badges
+
+2. **Tournament History**
+   - Tournament results table
+   - Clickable row interactions
+   - Responsive table design
+
+### Phase 7: Settings & Polish
+1. **Settings Page**
+   - Settings navigation cards
+   - Section organization
+   - Logout functionality
+
+2. **Final Polish**
+   - Error boundaries
+   - Loading states
+   - Responsive testing
+   - Dark mode verification
+
+## Technical Implementation Details
+
+### State Management
+```typescript
+// Use React Context for global state
+interface AppState {
+  user: User | null;
+  currentGame: Game | null;
+  theme: 'light' | 'dark';
+}
+
+// Local state for forms and UI interactions
+// No external state management library needed
+```
+
+### Chess Engine Integration
+```typescript
+// lib/chess-engine.ts
+export interface ChessGame {
+  board: ChessPiece[][];
+  currentPlayer: 'white' | 'black';
+  moveHistory: Move[];
+  gameStatus: 'active' | 'checkmate' | 'draw' | 'stalemate';
+}
+
+export interface Move {
+  from: Position;
+  to: Position;
+  piece: ChessPiece;
+  notation: string;
+  timestamp: Date;
+}
+```
+
+### Responsive Design Strategy
+- Mobile-first approach using Tailwind breakpoints
+- Chess board scales appropriately on all devices
+- Navigation collapses to hamburger menu on mobile
+- Tables scroll horizontally on small screens
+- Touch-friendly interactions for mobile chess play
+
+### Performance Optimization
+- Use Next.js App Router for optimal performance
+- Implement code splitting for chess engine
+- Lazy load game history data
+- Optimize images and avatars
+- Use React.memo for chess pieces to prevent unnecessary re-renders
+
+### Accessibility Implementation
+- Semantic HTML structure throughout
+- ARIA labels for chess board and pieces
+- Keyboard navigation for all interactive elements
+- Screen reader announcements for game state changes
+- High contrast mode support
+- Focus management for modals and forms
+
+### Testing Strategy
+- Unit tests for chess logic and move validation
+- Component tests for UI interactions
+- Integration tests for user flows
+- Visual regression tests for design consistency
+- Accessibility testing with screen readers
+
+This implementation blueprint provides a complete roadmap for building the Knight AI chess application exactly as specified in the original design, with no additional features or modifications beyond what was found in the HTML analysis.
