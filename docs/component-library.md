@@ -191,3 +191,101 @@
 - **Classes**: `w-80 flex-shrink-0 ml-8 bg-background-dark/50 dark:bg-background-dark/80 rounded-lg shadow-xl flex flex-col`
 - **Usage**: Game information display
 - **Found in**: knight_ai_chessboard.html
+- **Sections**: Game info, timers, move history
+
+### Move History
+- **Classes**: `flex-1 bg-background-dark/70 rounded-lg p-2 overflow-y-auto`
+- **Usage**: Chess notation display
+- **Found in**: knight_ai_chessboard.html
+- **List Classes**: `text-gray-300 font-mono text-sm space-y-1`
+
+## Layout Components
+
+### Split Layout
+- **Classes**: `flex min-h-screen`
+- **Usage**: Authentication pages
+- **Found in**: Login, signup pages
+- **Structure**: Decorative panel (lg:w-1/2) + content panel (w-full lg:w-1/2)
+
+### Chess Pattern Background
+- **Classes**: `chess-pattern` (custom CSS)
+- **Usage**: Decorative backgrounds
+- **Found in**: Authentication pages
+- **CSS**: Complex gradient pattern creating chess-like texture
+
+### Centered Container
+- **Classes**: `mx-auto max-w-7xl px-4 sm:px-6 lg:px-8` (large)
+- **Classes**: `max-w-2xl mx-auto` (medium)
+- **Classes**: `w-full max-w-md` (small)
+- **Usage**: Content centering with responsive padding
+- **Variants**: Different max-widths for different content types
+
+### Page Header
+- **Classes**: `mb-8 flex items-center justify-between`
+- **Usage**: Page titles with actions
+- **Found in**: game_result_summary.html
+- **Structure**: Title + controls (search, filters)
+
+## Navigation Components
+
+### Navigation Menu
+- **Classes**: `hidden md:flex items-center gap-6`
+- **Usage**: Main site navigation
+- **Found in**: Headers with full navigation
+- **Link Classes**: `text-sm font-medium hover:text-primary transition-colors`
+- **Active State**: `text-primary`
+
+### User Avatar
+- **Classes**: `h-10 w-10 rounded-full bg-cover bg-center` or `size-10 rounded-full`
+- **Usage**: User identification
+- **Found in**: All headers with user context
+- **Implementation**: Background image or img element
+
+## Utility Components
+
+### Material Icons
+- **Classes**: `material-symbols-outlined`
+- **Usage**: Throughout interface
+- **Settings**: `'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24`
+- **Sizes**: `text-3xl`, `text-4xl`, `text-6xl`
+
+### Loading States
+- **Pattern**: Disabled states with opacity
+- **Classes**: `disabled:opacity-50`
+- **Usage**: Buttons, form elements
+
+### Responsive Utilities
+- **Breakpoints**: `sm:`, `md:`, `lg:`
+- **Common Patterns**: 
+  - `hidden lg:flex` (desktop-only navigation)
+  - `w-full lg:w-1/2` (responsive widths)
+  - `px-4 sm:px-6 lg:px-8` (responsive padding)
+
+## Component Priorities
+
+### Priority 1 - Core Components (Required)
+- [ ] Header variants (4 types)
+- [ ] Primary/Secondary buttons
+- [ ] Form inputs and labels
+- [ ] Basic cards
+- [ ] Navigation menu
+
+### Priority 2 - Interactive Components
+- [ ] Radio button groups
+- [ ] Checkboxes
+- [ ] Status badges
+- [ ] Data tables
+- [ ] Search/filter controls
+
+### Priority 3 - Chess-Specific Components
+- [ ] Chess board
+- [ ] Chess pieces
+- [ ] Game sidebar
+- [ ] Move history
+- [ ] Turn indicators
+
+### Priority 4 - Advanced Components
+- [ ] Pagination
+- [ ] Settings cards
+- [ ] Split layouts
+- [ ] Chess pattern background
