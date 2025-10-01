@@ -14,6 +14,7 @@ interface Position {
 interface ChessBoardProps {
   className?: string;
   interactive?: boolean;
+  isBattle?: boolean;
   onCapturedPiecesChange?: (capturedPieces: {white: string[], black: string[]}) => void;
   onMoveHistoryChange?: (moveHistory: string[]) => void;
   onCurrentPlayerChange?: (currentPlayer: 'white' | 'black') => void;
@@ -22,6 +23,7 @@ interface ChessBoardProps {
 export default function ChessBoard({ 
   className = '', 
   interactive = true,
+  isBattle = false,
   onCapturedPiecesChange,
   onMoveHistoryChange,
   onCurrentPlayerChange
@@ -37,6 +39,31 @@ export default function ChessBoard({
   const [capturedPieces, setCapturedPieces] = useState<{white: string[], black: string[]}>({white: [], black: []});
   const [moveHistory, setMoveHistory] = useState<string[]>([]);
   const [currentPlayer, setCurrentPlayer] = useState<'white' | 'black'>('white');
+  const [healthPopup, setHealthPopup] = useState<{message: string, type: 'sarcastic' | 'relaxed' | 'encouraging'} | null>(null);
+
+  // Generate Gemini-powered health popups
+  const generateHealthPopup = async (moveCount: number, capturedPiece?: string, playerColor?: string) => {
+    if (!isBattle) return; // Only show health popups in battles
+    
+    try {
+      const context = capturedPiece 
+        ? `A ${playerColor} piece just captured a ${capturedPiece}. Move count: ${moveCount}`
+        : `Move ${moveCount} completed in the chess battle`;
+      
+      const response = await chessAI.generateHealthComment(context);
+      
+      // Determine popup type based on move count and situation
+      const type = moveCount < 10 ? 'encouraging' : 
+                   capturedPiece ? 'sarcastic' : 'relaxed';
+      
+      setHealthPopup({ message: response, type });
+      
+      // Auto-hide popup after 3 seconds
+      setTimeout(() => setHealthPopup(null), 3000);
+    } catch (error) {
+      console.log('Health popup generation failed:', error);
+    }
+  };
 
   const isValidMove = (from: Position, to: Position): boolean => {
     // Use ChessAI to validate if the move is legal
@@ -131,9 +158,14 @@ export default function ChessBoard({
     const newMoveCount = moveCount + 1;
     setMoveCount(newMoveCount);
 
-    // Show popup after 6-8 moves (3-4 moves from each side)
-    if (!isFullMatch && newMoveCount >= 6 && newMoveCount <= 8) {
+    // Show popup after 6-8 moves (3-4 moves from each side) - but not in battles
+    if (!isBattle && !isFullMatch && newMoveCount >= 6 && newMoveCount <= 8) {
       setShowMatchModal(true);
+    }
+
+    // Generate health popup for battles
+    if (isBattle) {
+      generateHealthPopup(newMoveCount, capturedPiece, playerColor);
     }
   };
 
@@ -251,6 +283,27 @@ export default function ChessBoard({
           )}
         </div>
       </div>
+
+      {/* Health Popup for Battles */}
+      {healthPopup && (
+        <div className="fixed top-4 right-4 z-50 animate-in slide-in-from-right-2 duration-300">
+          <div className={`px-4 py-3 rounded-lg shadow-lg max-w-sm ${
+            healthPopup.type === 'sarcastic' 
+              ? 'bg-orange-500 text-white' 
+              : healthPopup.type === 'relaxed'
+              ? 'bg-blue-500 text-white'
+              : 'bg-green-500 text-white'
+          }`}>
+            <div className="flex items-center gap-2">
+              <span className="material-symbols-outlined text-lg">
+                {healthPopup.type === 'sarcastic' ? 'sentiment_neutral' : 
+                 healthPopup.type === 'relaxed' ? 'sentiment_calm' : 'sentiment_satisfied'}
+              </span>
+              <p className="text-sm font-medium">{healthPopup.message}</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Play a Match Modal */}
       <Modal

@@ -14,7 +14,9 @@ const config: Config = {
         'background-light': '#f6f6f8',
         'background-dark': '#101622',
         'board-dark': '#769656',
-        'board-light': '#eeeed2',
+        'board-light': '#e9edc9',
+        'board-light-green': '#e9edc9',
+        'board-dark-green': '#769656',
         accent: {
           DEFAULT: '#3b82f6',
           hover: '#2563eb',
@@ -22,6 +24,9 @@ const config: Config = {
         win: '#22c55e',
         loss: '#ef4444',
         draw: '#f97316',
+        optimal: '#22c55e',
+        mistake: '#f97316',
+        blunder: '#ef4444',
       },
       fontFamily: {
         display: ['Space Grotesk', 'sans-serif'],

@@ -4,16 +4,34 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Header from '@/components/layout/Header';
 import ChessBoard from '@/components/chess/ChessBoard';
+import Modal from '@/components/ui/Modal';
 import Button from '@/components/ui/Button';
 
 export default function ChessboardPage() {
   const searchParams = useSearchParams();
   const gameMode = searchParams.get('mode') || 'human';
+  const whitePlayer = searchParams.get('whitePlayer') || 'White Player';
+  const blackPlayer = searchParams.get('blackPlayer') || 'Black Player';
+  const autoStart = searchParams.get('autoStart') === 'true';
   const isAIvsAI = gameMode === 'ai-vs-ai';
   
   const [currentPlayer, setCurrentPlayer] = useState<'white' | 'black'>('white');
   const [capturedPieces, setCapturedPieces] = useState<{white: string[], black: string[]}>({white: [], black: []});
   const [moveHistory, setMoveHistory] = useState<string[]>([]);
+  const [gameStarted, setGameStarted] = useState(autoStart);
+  const [showBattleInfo, setShowBattleInfo] = useState(autoStart);
+
+  // Auto-start game if coming from setup page
+  useEffect(() => {
+    if (autoStart && !gameStarted) {
+      setGameStarted(true);
+      setShowBattleInfo(true);
+      // Add initial battle message to move history
+      if (gameMode === 'ai-vs-ai') {
+        setMoveHistory([`🤖 AI Battle Started: ${whitePlayer} vs ${blackPlayer}`]);
+      }
+    }
+  }, [autoStart, gameStarted, gameMode, whitePlayer, blackPlayer]);
 
   const handleCapturedPiecesChange = (newCapturedPieces: {white: string[], black: string[]}) => {
     setCapturedPieces(newCapturedPieces);
@@ -59,6 +77,7 @@ export default function ChessboardPage() {
         <div className="flex flex-1 items-center justify-center">
           <ChessBoard 
             interactive={!isAIvsAI}
+            isBattle={autoStart}
             onCapturedPiecesChange={handleCapturedPiecesChange}
             onMoveHistoryChange={handleMoveHistoryChange}
             onCurrentPlayerChange={handleCurrentPlayerChange}
@@ -106,14 +125,24 @@ export default function ChessboardPage() {
               </div>
             </div>
 
-            {/* Timers */}
+            {/* Player Info & Timers */}
             <div className="flex justify-between items-center bg-background-dark/70 p-3 rounded-lg">
-              <span className="text-gray-400">White</span>
+              <div className="flex flex-col">
+                <span className="text-gray-400 text-xs">White</span>
+                <span className="text-white font-semibold text-sm truncate max-w-32" title={whitePlayer}>
+                  {whitePlayer}
+                </span>
+              </div>
               <span className="font-mono text-lg font-bold text-white">05:00</span>
             </div>
 
             <div className="flex justify-between items-center bg-background-dark/70 p-3 rounded-lg">
-              <span className="text-gray-400">Black</span>
+              <div className="flex flex-col">
+                <span className="text-gray-400 text-xs">Black</span>
+                <span className="text-white font-semibold text-sm truncate max-w-32" title={blackPlayer}>
+                  {blackPlayer}
+                </span>
+              </div>
               <span className="font-mono text-lg font-bold text-white">05:00</span>
             </div>
           </div>

@@ -26,8 +26,26 @@ export default function AIVsAISetupPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('AI vs AI setup:', formData);
-    // Navigate to AI vs AI game
-    window.location.href = '/play?mode=ai-vs-ai';
+    
+    // Get display names for the AI models
+    const ai1Name = aiModels.find(model => model.value === formData.ai1Model)?.label || formData.ai1Model;
+    const ai2Name = aiModels.find(model => model.value === formData.ai2Model)?.label || formData.ai2Model;
+    
+    // Navigate to AI vs AI game with player data
+    const params = new URLSearchParams({
+      mode: 'ai-vs-ai',
+      whitePlayer: ai1Name,
+      blackPlayer: ai2Name,
+      ai1Model: formData.ai1Model,
+      ai1Difficulty: formData.ai1Difficulty,
+      ai2Model: formData.ai2Model,
+      ai2Difficulty: formData.ai2Difficulty,
+      matchType: formData.matchType,
+      timeControl: formData.timeControl,
+      autoStart: 'true'
+    });
+    
+    window.location.href = `/play?${params.toString()}`;
   };
 
   const aiModels = [

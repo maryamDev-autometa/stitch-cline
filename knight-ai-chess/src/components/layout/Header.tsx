@@ -17,10 +17,10 @@ interface NavigationMenuProps {
 function NavigationMenu({ activeItem }: NavigationMenuProps) {
   const menuItems = [
     { label: 'Play', href: '/play' },
-    { label: 'Learn', href: '/learn' },
-    { label: 'Community', href: '/community' },
-    { label: 'Game History', href: '/history' },
-    { label: 'Past Tournaments', href: '/tournaments' }
+    // { label: 'Learn', href: '/learn' },
+    // { label: 'Community', href: '/community' },
+    // { label: 'Game History', href: '/history' },
+    { label: 'Past Tournaments', href: '/history' }
   ];
 
   return (
@@ -97,9 +97,9 @@ export default function Header({ variant = 'standard', className = '' }: HeaderP
           <div className="flex items-center gap-6">
             <NavigationMenu />
             <div className="flex items-center gap-4">
-              <Button variant="icon">
+              {/* <Button variant="icon">
                 <span className="material-symbols-outlined">settings</span>
-              </Button>
+              </Button> */}
               <UserAvatar />
             </div>
           </div>

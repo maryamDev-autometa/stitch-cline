@@ -26,8 +26,21 @@ export default function HumanVsHumanSetupPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Human vs Human setup:', formData);
-    // Navigate to Human vs Human game
-    window.location.href = '/play?mode=human-vs-human';
+    
+    // Use player names or defaults
+    const whitePlayer = formData.player1Name || 'Player 1';
+    const blackPlayer = formData.player2Name || 'Player 2';
+    
+    // Navigate to Human vs Human game with player data
+    const params = new URLSearchParams({
+      mode: 'human-vs-human',
+      whitePlayer,
+      blackPlayer,
+      timeControl: formData.timeControl || '5+0',
+      autoStart: 'true'
+    });
+    
+    window.location.href = `/play?${params.toString()}`;
   };
 
   const timeControls = [

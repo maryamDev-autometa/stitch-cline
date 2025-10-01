@@ -11,6 +11,8 @@ export default function HumanVsAISetupPage() {
     humanName: '',
     aiModel: 'gemini_2.5_flash',
     difficulty: 'intermediate',
+    playerColor: 'white',
+    timeControl: '5+0',
     useOpeningBook: false,
     useEndgameTablebase: false
   });
@@ -26,8 +28,28 @@ export default function HumanVsAISetupPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Human vs AI setup:', formData);
-    // Navigate to Human vs AI game
-    window.location.href = '/play?mode=human-vs-ai';
+    
+    // Get AI model display name
+    const aiName = aiModels.find(model => model.value === formData.aiModel)?.label || formData.aiModel;
+    const humanName = 'You';
+    
+    // Determine player assignments based on color choice
+    const whitePlayer = formData.playerColor === 'white' ? humanName : aiName;
+    const blackPlayer = formData.playerColor === 'white' ? aiName : humanName;
+    
+    // Navigate to Human vs AI game with player data
+    const params = new URLSearchParams({
+      mode: 'human-vs-ai',
+      whitePlayer,
+      blackPlayer,
+      playerColor: formData.playerColor,
+      aiModel: formData.aiModel,
+      aiDifficulty: formData.difficulty,
+      timeControl: formData.timeControl,
+      autoStart: 'true'
+    });
+    
+    window.location.href = `/play?${params.toString()}`;
   };
 
   const aiModels = [

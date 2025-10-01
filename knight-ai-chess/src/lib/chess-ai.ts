@@ -284,4 +284,33 @@ Always respond in this exact JSON format:
   private isValidSquare(row: number, col: number): boolean {
     return row >= 0 && row < 8 && col >= 0 && col < 8;
   }
+
+  async generateHealthComment(context: string): Promise<string> {
+    const prompts = [
+      // Sarcastic comments
+      "Oh wow, another chess move. How revolutionary.",
+      "I'm sure that move will go down in chess history... not.",
+      "Bold strategy, let's see how that works out.",
+      "That's... certainly a choice you made there.",
+      "Chess genius at work, clearly.",
+      
+      // Relaxed comments  
+      "Just another day at the chess board, no big deal.",
+      "Taking it easy, one move at a time.",
+      "Smooth sailing so far, keep it chill.",
+      "No pressure, just enjoying the game.",
+      "Zen mode: activated.",
+      
+      // Encouraging comments
+      "Nice move! The battle heats up!",
+      "Things are getting interesting now!",
+      "Great tactical play developing!",
+      "The plot thickens! Exciting stuff!",
+      "Solid chess fundamentals on display!"
+    ];
+
+    // Return a random comment for now (in a real implementation, you'd use Gemini API)
+    const randomIndex = Math.floor(Math.random() * prompts.length);
+    return prompts[randomIndex];
+  }
 }

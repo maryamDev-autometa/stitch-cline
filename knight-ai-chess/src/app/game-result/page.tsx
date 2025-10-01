@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '@/components/layout/Header';
 import Button from '@/components/ui/Button';
 
@@ -9,29 +9,19 @@ export default function GameResultSummary() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const moveList = [
-    { move: 'e4', player: 'white' },
-    { move: 'e5', player: 'black' },
-    { move: 'Nf3', player: 'white' },
-    { move: 'Nc6', player: 'black' },
-    { move: 'Bb5', player: 'white' },
-    { move: 'a6', player: 'black' },
-    { move: 'Ba4', player: 'white' },
-    { move: 'Nf6', player: 'black' },
-    { move: 'O-O', player: 'white' },
-    { move: 'Be7', player: 'black' },
-    { move: 'Re1', player: 'white' },
-    { move: 'b5', player: 'black' },
-    { move: 'Bb3', player: 'white' },
-    { move: 'O-O', player: 'black' },
-    { move: 'c3', player: 'white' },
-    { move: 'Na5', player: 'black' },
-    { move: 'Bc2', player: 'white' },
-    { move: 'c5', player: 'black' },
-    { move: 'h3', player: 'white' },
-    { move: 'Nc6', player: 'black' }
+    { move: 'Pawn e2 to e4', player: 'white', from: [6, 4], to: [4, 4] },
+    { move: 'Pawn e7 to e5', player: 'black', from: [1, 4], to: [3, 4] },
+    { move: 'Knight g1 to f3', player: 'white', from: [7, 6], to: [5, 5] },
+    { move: 'Knight b8 to c6', player: 'black', from: [0, 1], to: [2, 2] },
+    { move: 'Bishop f1 to b5', player: 'white', from: [7, 5], to: [3, 1] },
+    { move: 'Pawn a7 to a6', player: 'black', from: [1, 0], to: [2, 0] },
+    { move: 'Bishop b5 to a4', player: 'white', from: [3, 1], to: [4, 0] },
+    { move: 'Knight g8 to f6', player: 'black', from: [0, 6], to: [2, 5] },
+    { move: 'King castles short', player: 'white', from: [7, 4], to: [7, 6] },
+    { move: 'Bishop f8 to e7', player: 'black', from: [0, 5], to: [1, 4] },
   ];
 
-  const initialBoard = [
+  const getInitialBoard = () => [
     ['♜', '♞', '♝', '♛', '♚', '♝', '♞', '♜'],
     ['♟', '♟', '♟', '♟', '♟', '♟', '♟', '♟'],
     ['', '', '', '', '', '', '', ''],
@@ -39,8 +29,43 @@ export default function GameResultSummary() {
     ['', '', '', '', '', '', '', ''],
     ['', '', '', '', '', '', '', ''],
     ['♙', '♙', '♙', '♙', '♙', '♙', '♙', '♙'],
-    ['♖', '♘', '♗', '♕', '♔', '♗', '♘', '♖']
+    ['♖', '♘', '♗', '♕', '♔', '♗', '♘', '♖'],
   ];
+
+  const [currentBoard, setCurrentBoard] = useState(() => getInitialBoard());
+
+  // Update board when currentMove changes
+  const updateBoardToMove = (moveIndex: number) => {
+    const board = getInitialBoard();
+    
+    // Apply all moves up to the current move
+    for (let i = 0; i < moveIndex && i < moveList.length; i++) {
+      const move = moveList[i];
+      if (move.from && move.to) {
+        const [fromRow, fromCol] = move.from;
+        const [toRow, toCol] = move.to;
+        const piece = board[fromRow][fromCol];
+        
+        // Move the piece
+        board[toRow][toCol] = piece;
+        board[fromRow][fromCol] = '';
+        
+        // Handle special moves like castling
+        if (move.move.includes('castles short')) {
+          // Move rook for short castling
+          if (move.player === 'white') {
+            board[7][5] = board[7][7]; // Move rook from h1 to f1
+            board[7][7] = '';
+          } else {
+            board[0][5] = board[0][7]; // Move rook from h8 to f8
+            board[0][7] = '';
+          }
+        }
+      }
+    }
+    
+    setCurrentBoard(board);
+  };
 
   const handlePrevious = () => {
     if (currentMove > 0) {
@@ -58,22 +83,32 @@ export default function GameResultSummary() {
     setIsPlaying(!isPlaying);
   };
 
+  // Update board when currentMove changes
+  useEffect(() => {
+    updateBoardToMove(currentMove);
+  }, [currentMove]);
+
   const renderSquare = (row: number, col: number) => {
-    const isLight = (row + col) % 2 !== 0;
-    const piece = initialBoard[row][col];
+    const isLight = (row + col) % 2 === 0;
+    const piece = currentBoard[row][col];
+    
+    // Determine piece color based on the piece itself, not position
+    // Black pieces: ♜♞♝♛♚♟ (filled black symbols)
+    // White pieces: ♖♘♗♕♔♙ (filled white symbols) - but we're using same symbols with different colors
+    const isBlackPiece = piece && ['♜', '♞', '♝', '♛', '♚', '♟'].includes(piece);
     
     return (
       <div
         key={`${row}-${col}`}
         className={`flex items-center justify-center ${
-          isLight ? 'bg-board-light' : 'bg-board-dark'
+          isLight ? 'bg-board-light-green' : 'bg-board-dark-green'
         }`}
       >
         {piece && (
-          <span className={`text-3xl select-none ${
-            '♜♞♝♛♚♟'.includes(piece) 
-              ? 'text-black drop-shadow-sm' 
-              : 'text-white white-piece drop-shadow-sm'
+          <span className={`text-[2.5rem] leading-none cursor-pointer ${
+            isBlackPiece 
+              ? 'text-gray-900 dark:text-black' 
+              : 'text-gray-100 dark:text-white'
           }`}>
             {piece}
           </span>
@@ -181,7 +216,7 @@ export default function GameResultSummary() {
                             onClick={() => setCurrentMove(i * 2)}
                           >
                             {whiteMove?.move} 
-                            <span className="inline-block w-3 h-3 rounded-full bg-green-500 ml-2" title="Optimal"></span>
+                            <span className="inline-block w-3 h-3 rounded-full bg-optimal ml-2" title="Optimal"></span>
                           </td>
                           <td 
                             className={`px-2 py-2 whitespace-nowrap text-sm cursor-pointer ${
@@ -192,7 +227,7 @@ export default function GameResultSummary() {
                             {blackMove?.move} 
                             {blackMove && (
                               <span className={`inline-block w-3 h-3 rounded-full ml-2 ${
-                                i === 4 ? 'bg-orange-500' : i === 7 ? 'bg-red-500' : 'bg-green-500'
+                                i === 4 ? 'bg-mistake' : i === 7 ? 'bg-blunder' : 'bg-optimal'
                               }`} title={i === 4 ? 'Mistake' : i === 7 ? 'Blunder' : 'Optimal'}></span>
                             )}
                           </td>
