@@ -58,8 +58,8 @@ export default function ForgotPasswordPage() {
 
             <div className="text-center">
               <Link
-                href="/"
-                className="text-sm font-medium text-primary hover:text-primary/90"
+                href="/authentication/login"
+                className="font-medium text-primary hover:text-primary/90"
               >
                 Back to login
               </Link>
