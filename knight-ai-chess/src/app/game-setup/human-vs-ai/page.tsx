@@ -49,7 +49,7 @@ export default function HumanVsAISetupPage() {
       autoStart: 'true'
     });
     
-    window.location.href = `/play?${params.toString()}`;
+    window.location.href = `/active-game/play?${params.toString()}`;
   };
 
   const aiModels = [

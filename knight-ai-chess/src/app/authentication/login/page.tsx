@@ -28,8 +28,8 @@ export default function LoginPage() {
     console.log('Login form submitted:', formData);
     
     // TODO: Add actual authentication logic here
-    // For now, simulate successful login and navigate to play page
-    router.push('/play');
+    // For now, simulate successful login and navigate to game setup page
+    router.push('/active-game/play');
   };
 
   return (

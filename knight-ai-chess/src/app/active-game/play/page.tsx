@@ -171,7 +171,7 @@ export default function ChessboardPage() {
             <Button 
               variant="secondary" 
               fullWidth
-              onClick={() => window.location.href = '/history'}
+              onClick={() => window.location.href = '/game-history/summary'}
               className="flex items-center justify-center gap-2"
             >
               <span className="material-symbols-outlined">history</span>

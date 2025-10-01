@@ -40,7 +40,7 @@ export default function HumanVsHumanSetupPage() {
       autoStart: 'true'
     });
     
-    window.location.href = `/play?${params.toString()}`;
+    window.location.href = `/active-game/play?${params.toString()}`;
   };
 
   const timeControls = [

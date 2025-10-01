@@ -181,7 +181,7 @@ export default function GameHistoryPage() {
                       {game.duration}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
-                      <a href="/game-result" className="text-primary hover:underline">
+                      <a href="/game-history/game-detail" className="text-primary hover:underline">
                         View Game
                       </a>
                     </td>

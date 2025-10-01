@@ -16,11 +16,11 @@ interface NavigationMenuProps {
 
 function NavigationMenu({ activeItem }: NavigationMenuProps) {
   const menuItems = [
-    { label: 'Play', href: '/play' },
+    { label: 'Play', href: '/game-setup/human-vs-ai' },
     // { label: 'Learn', href: '/learn' },
     // { label: 'Community', href: '/community' },
-    // { label: 'Game History', href: '/history' },
-    { label: 'Past Tournaments', href: '/history' }
+    { label: 'Past Games', href: '/game-history/summary' },
+    // { label: 'Past Tournaments', href: '/game-history/game-result' }
   ];
 
   return (
@@ -57,9 +57,9 @@ export default function Header({ variant = 'standard', className = '' }: HeaderP
 
   if (variant === 'standard') {
     const gameTypeOptions = [
-      { label: 'Human vs Human', href: '/setup/human-vs-human', icon: 'people' },
-      { label: 'Human vs AI', href: '/setup/human-vs-ai', icon: 'smart_toy' },
-      { label: 'AI vs AI', href: '/setup/ai-vs-ai', icon: 'psychology' }
+      { label: 'Human vs Human', href: '/game-setup/human-vs-human', icon: 'people' },
+      { label: 'Human vs AI', href: '/game-setup/human-vs-ai', icon: 'smart_toy' },
+      { label: 'AI vs AI', href: '/game-setup/ai-vs-ai', icon: 'psychology' }
     ];
 
     return (

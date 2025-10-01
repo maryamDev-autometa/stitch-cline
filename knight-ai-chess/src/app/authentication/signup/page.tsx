@@ -5,8 +5,10 @@ import Link from 'next/link';
 import Logo from '@/components/ui/Logo';
 import Button from '@/components/ui/Button';
 import Input from '@/components/forms/Input';
+import { useRouter } from 'next/navigation';
 
 export default function SignupPage() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -25,6 +27,7 @@ export default function SignupPage() {
     e.preventDefault();
     console.log('Signup form submitted:', formData);
     // Handle form submission
+    router.push('/active-game/play');
   };
 
   return (
