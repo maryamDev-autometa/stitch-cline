@@ -26,9 +26,14 @@ src/components/
 │   ├── Header.tsx             ✅ Existing (Minimal, Standard, Full, Sticky variants)
 │   └── Container.tsx          ✅ Existing (Responsive containers)
 │
-└── chess/                      # Chess-Specific Components
-    ├── ChessBoard.tsx         ✅ Existing (Interactive chess board)
-    └── GameResultSummary.tsx  ✅ Existing (Game result display)
+├── chess/                      # Chess-Specific Components
+│   ├── ChessBoard.tsx         ✅ Existing (Interactive chess board)
+│   └── GameResultSummary.tsx  ✅ Existing (Game result display)
+│
+└── utils/                      # Utility Components
+    ├── LoadingSpinner.tsx     ✅ New (Loading states with sizes)
+    ├── ErrorBoundary.tsx      ✅ New (Error handling wrapper)
+    └── Toast.tsx              ✅ New (Notification system with context)
 ```
 
 ## Component Reference
@@ -335,6 +340,131 @@ import Container from '@/components/layout/Container';
 - `size`: 'sm' | 'md' | 'lg' | 'xl'
 - `className`: string
 - `children`: React.ReactNode
+
+---
+
+#### LoadingSpinner Component
+**File**: `src/components/utils/LoadingSpinner.tsx`
+
+**Sizes**: sm, md, lg
+
+**Usage**:
+```tsx
+import LoadingSpinner from '@/components/utils/LoadingSpinner';
+
+// Inline spinner
+<LoadingSpinner size="md" />
+
+// Full screen loading overlay
+<LoadingSpinner size="lg" fullScreen />
+
+// With custom classes
+<LoadingSpinner size="sm" className="text-primary" />
+```
+
+**Props**:
+- `size`: 'sm' | 'md' | 'lg' (default: 'md')
+- `className`: string
+- `fullScreen`: boolean (default: false)
+
+**Features**:
+- Accessible with screen reader text
+- Respects reduced motion preferences
+- Full screen overlay option
+- Customizable size and color
+
+---
+
+#### ErrorBoundary Component
+**File**: `src/components/utils/ErrorBoundary.tsx`
+
+**Usage**:
+```tsx
+import ErrorBoundary from '@/components/utils/ErrorBoundary';
+
+// Wrap components to catch errors
+<ErrorBoundary>
+  <YourComponent />
+</ErrorBoundary>
+
+// With custom fallback
+<ErrorBoundary fallback={<CustomErrorUI />}>
+  <YourComponent />
+</ErrorBoundary>
+```
+
+**Props**:
+- `children`: React.ReactNode
+- `fallback`: React.ReactNode (optional)
+
+**Features**:
+- Catches React errors in child components
+- Displays user-friendly error message
+- "Try Again" button to reset error state
+- "Go to Home" button for navigation
+- Logs errors to console
+- Custom fallback UI support
+
+---
+
+#### Toast Component
+**File**: `src/components/utils/Toast.tsx`
+
+**Types**: success, error, info, warning
+
+**Usage**:
+```tsx
+import { ToastProvider, useToast } from '@/components/utils/Toast';
+
+// 1. Wrap your app with ToastProvider in layout
+<ToastProvider>
+  <YourApp />
+</ToastProvider>
+
+// 2. Use toast in any component
+function MyComponent() {
+  const { showToast } = useToast();
+  
+  return (
+    <Button onClick={() => showToast('Success!', 'success', 3000)}>
+      Show Toast
+    </Button>
+  );
+}
+```
+
+**API**:
+- `showToast(message, type, duration)`: Display a toast notification
+  - `message`: string - The notification message
+  - `type`: 'success' | 'error' | 'info' | 'warning' (default: 'info')
+  - `duration`: number in ms (default: 3000, 0 for persistent)
+
+**Features**:
+- Auto-dismissal after duration
+- Manual close button
+- Stacking multiple toasts
+- Color-coded by type
+- Material Icons for visual feedback
+- Accessible with ARIA roles
+- Slide-in animation
+
+**Example Use Cases**:
+```tsx
+// Success notification
+showToast('Game saved successfully!', 'success');
+
+// Error notification
+showToast('Failed to load game', 'error');
+
+// Info notification
+showToast('Your turn to move', 'info');
+
+// Warning notification
+showToast('Connection unstable', 'warning');
+
+// Persistent toast (no auto-dismiss)
+showToast('Important message', 'info', 0);
+```
 
 ---
 
